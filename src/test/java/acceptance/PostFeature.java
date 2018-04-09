@@ -1,8 +1,10 @@
 package acceptance;
 
+import com.codurance.twitterminal.CommandFactories;
 import com.codurance.twitterminal.Commands;
 import com.codurance.twitterminal.InputParser;
 import com.codurance.twitterminal.Post;
+import com.codurance.twitterminal.PostCommandFactory;
 import com.codurance.twitterminal.PostRepository;
 import com.codurance.twitterminal.Twitterminal;
 import com.codurance.twitterminal.User;
@@ -22,7 +24,8 @@ public class PostFeature {
         UserRepository userRepository = new UserRepository();
         PostRepository postRepository = new PostRepository();
         InputParser inputParser = new InputParser();
-        Commands commands = new Commands(userRepository, postRepository);
+        CommandFactories commandFactories = new CommandFactories(userRepository, postRepository);
+        Commands commands = new Commands(commandFactories);
         Twitterminal twitterminal = new Twitterminal(inputParser, commands);
         List<User> expectedUsers = singletonList(new User("Sandro"));
         List<Post> expectedPosts = singletonList(new Post(expectedUsers.get(0), "Hello everyone."));
