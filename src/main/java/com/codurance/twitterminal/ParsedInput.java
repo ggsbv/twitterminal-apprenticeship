@@ -2,14 +2,22 @@ package com.codurance.twitterminal;
 
 import java.util.Objects;
 
+import static com.codurance.twitterminal.Verb.*;
+
 public class ParsedInput {
     private final String subject;
     private final Verb verb;
     private final String text;
 
+    public ParsedInput(String subject) {
+        this.subject = subject;
+        this.verb = READ;
+        this.text = "";
+    }
+
     public ParsedInput(String subject, String verb, String text) {
         this.subject = subject;
-        this.verb = Verb.valueFor(verb);
+        this.verb = valueFor(verb);
         this.text = text;
     }
 
@@ -31,7 +39,7 @@ public class ParsedInput {
         if (o == null || getClass() != o.getClass()) return false;
         ParsedInput that = (ParsedInput) o;
         return Objects.equals(subject, that.subject) &&
-                Objects.equals(verb, that.verb) &&
+                verb == that.verb &&
                 Objects.equals(text, that.text);
     }
 
@@ -40,5 +48,4 @@ public class ParsedInput {
 
         return Objects.hash(subject, verb, text);
     }
-
 }

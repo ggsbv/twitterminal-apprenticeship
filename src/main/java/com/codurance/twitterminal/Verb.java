@@ -1,7 +1,8 @@
 package com.codurance.twitterminal;
 
 public enum Verb {
-    POST("->");
+    POST("->"),
+    READ("");
 
     private String value;
 
@@ -15,6 +16,6 @@ public enum Verb {
                 return verb;
         }
 
-        return null;
+        return Verb.READ;
     }
 }

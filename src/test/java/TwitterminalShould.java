@@ -16,12 +16,10 @@ import static org.mockito.Mockito.verify;
 public class TwitterminalShould {
     private Twitterminal twitterminal;
     private String input;
+    private ParsedInput parsedInput;
 
     @Mock
     private InputParser inputParser;
-
-    @Mock
-    private ParsedInput parsedInput;
 
     @Mock
     private Commands commands;
@@ -33,11 +31,14 @@ public class TwitterminalShould {
     public void initialise() {
         input = "Sandro -> Hello Tony!";
         twitterminal = new Twitterminal(inputParser, commands);
+        parsedInput = new ParsedInput("Sandro", "->", "Hello Tony!");
     }
 
     @Test
     public void
     call_input_parser_with_correct_input() {
+        when(inputParser.parse(input)).thenReturn(parsedInput);
+
         twitterminal.execute(input);
 
         verify(inputParser).parse(input);

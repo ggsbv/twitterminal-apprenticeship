@@ -2,7 +2,7 @@ package com.codurance.twitterminal;
 
 import java.util.Objects;
 
-public class PostCommand extends Command {
+public class PostCommand implements Command {
     private final User user;
     private final Post post;
     private UserRepository userRepository;

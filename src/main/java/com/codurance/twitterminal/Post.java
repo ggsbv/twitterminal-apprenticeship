@@ -1,12 +1,13 @@
 package com.codurance.twitterminal;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Post {
     private final User user;
     private final String text;
 
-    public Post(User user, String text) {
+    public Post(User user, String text, LocalDateTime currentTime) {
         this.user = user;
         this.text = text;
     }
