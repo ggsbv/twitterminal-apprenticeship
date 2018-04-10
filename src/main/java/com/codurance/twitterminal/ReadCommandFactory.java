@@ -4,14 +4,16 @@ import java.util.Objects;
 
 public class ReadCommandFactory implements CommandFactory {
     private final PostRepository postRepository;
+    private final TimelinePrinter timelinePrinter;
 
-    public ReadCommandFactory(PostRepository postRepository) {
+    public ReadCommandFactory(PostRepository postRepository, TimelinePrinter timelinePrinter) {
         this.postRepository = postRepository;
+        this.timelinePrinter = timelinePrinter;
     }
 
     @Override
     public Command commandFor(ParsedInput input) {
-        return new ReadCommand(new User(input.subject()), postRepository);
+        return new ReadCommand(new User(input.subject()), postRepository, timelinePrinter);
     }
 
     @Override

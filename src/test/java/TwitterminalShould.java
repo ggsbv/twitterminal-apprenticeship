@@ -38,6 +38,7 @@ public class TwitterminalShould {
     public void
     call_input_parser_with_correct_input() {
         when(inputParser.parse(input)).thenReturn(parsedInput);
+        when(commands.commandFor(parsedInput)).thenReturn(command);
 
         twitterminal.execute(input);
 
@@ -49,6 +50,7 @@ public class TwitterminalShould {
     public void
     get_the_appropriate_command_for_the_parsed_input() {
         when(inputParser.parse(input)).thenReturn(parsedInput);
+        when(commands.commandFor(parsedInput)).thenReturn(command);
 
         twitterminal.execute(input);
 

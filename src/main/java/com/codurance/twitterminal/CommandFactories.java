@@ -9,9 +9,13 @@ import static com.codurance.twitterminal.Verb.READ;
 public class CommandFactories {
     private Map<Verb, CommandFactory> factories = new HashMap<>();
 
-    public CommandFactories(UserRepository userRepository, PostRepository postRepository, Clock clock) {
+    public CommandFactories(
+            UserRepository userRepository,
+            PostRepository postRepository,
+            Clock clock,
+            TimelinePrinter timelinePrinter) {
         factories.put(POST, new PostCommandFactory(userRepository, postRepository, clock));
-        factories.put(READ, new ReadCommandFactory(postRepository));
+        factories.put(READ, new ReadCommandFactory(postRepository, timelinePrinter));
     }
     
     public CommandFactory factoryFor(Verb verb) {

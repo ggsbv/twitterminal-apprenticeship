@@ -3,9 +3,12 @@ package acceptance;
 import com.codurance.twitterminal.Clock;
 import com.codurance.twitterminal.CommandFactories;
 import com.codurance.twitterminal.Commands;
+import com.codurance.twitterminal.Console;
 import com.codurance.twitterminal.InputParser;
 import com.codurance.twitterminal.Post;
 import com.codurance.twitterminal.PostRepository;
+import com.codurance.twitterminal.TimelinePrinter;
+import com.codurance.twitterminal.TimestampFormatter;
 import com.codurance.twitterminal.Twitterminal;
 import com.codurance.twitterminal.User;
 import com.codurance.twitterminal.UserRepository;
@@ -27,13 +30,18 @@ public class PostFeature {
     @Mock
     private Clock clock;
 
+    @Mock
+    private Console console;
+
     @Test
     public void
     should_create_a_new_user_that_has_one_post() {
         UserRepository userRepository = new UserRepository();
         PostRepository postRepository = new PostRepository();
         InputParser inputParser = new InputParser();
-        CommandFactories commandFactories = new CommandFactories(userRepository, postRepository, clock);
+        TimestampFormatter timestampFormatter = new TimestampFormatter();
+        TimelinePrinter timelinePrinter = new TimelinePrinter(console, timestampFormatter);
+        CommandFactories commandFactories = new CommandFactories(userRepository, postRepository, clock, timelinePrinter);
         Commands commands = new Commands(commandFactories);
         Twitterminal twitterminal = new Twitterminal(inputParser, commands);
         List<User> expectedUsers = singletonList(new User("Sandro"));
